@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Copy And Paste (CPAP)</title>
+</head>
+<body>
+  <h2>copied</h2>
+  <p id="copiedText"></p>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const textToCopy = urlParams.get('p');
+
+    if (textToCopy) {
+      // テキストをコピー
+      navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+          document.getElementById("copiedText").textContent = `${textToCopy}`;
+        })
+        .catch(err => {
+          document.getElementById("copiedText").textContent = "ERROR " + err;
+        });
+    } else {
+      document.getElementById("copiedText").textContent = "WTF";
+    }
+  </script>
+</body>
+</html>
