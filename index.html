@@ -3,29 +3,86 @@
 <head>
   <meta charset="UTF-8">
   <title>zakocord.xyz/api</title>
+  <style>
+    /* ページ全体のスタイル */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #5e2a8c; /* 紫色の背景 */
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* テキストスタイル */
+    .copyText {
+      font-size: 2em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    /* テキストのホバー時のグロー効果 */
+    .copyText:hover {
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5);
+      color: #ffb3ff; /* グロー時に色変更 */
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 20px;
+      font-size: 1em;
+      color: #ddd;
+      animation: fadeIn 3s ease-in-out;
+    }
+
+    /* アニメーションを定義 */
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
 <body>
-  <h2></h2>
-  <button id="copyBtn">COPY</button>
+  <h2>Click the text to COPY</h2>
+  <div class="copyText" id="copyText">Click To Copy</div>
   <p id="result"></p>
+  
+  <div class="foote"Created by Zakocord"</div>
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const textToCopy = urlParams.get('p');
-    const btn = document.getElementById("copyBtn");
+    const copyText = document.getElementById("copyText");
     const result = document.getElementById("result");
 
-    btn.addEventListener("click", () => {
+    copyText.addEventListener("click", () => {
       if (textToCopy) {
         navigator.clipboard.writeText(textToCopy)
           .then(() => {
-            result.textContent = "Succseful";
+            result.textContent = "Successful";
           })
           .catch(err => {
             result.textContent = "ERROR: " + err;
           });
       } else {
-        result.textContent = "YOUR IDIOT FUCK";
+        result.textContent = "ERROR: No text to copy";
       }
     });
   </script>
