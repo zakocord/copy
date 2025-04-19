@@ -2,28 +2,32 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>Copy And Paste (CPAP)</title>
+  <title>zakocord.xyz/api</title>
 </head>
 <body>
-  <h2>copied</h2>
-  <p id="copiedText"></p>
+  <h2></h2>
+  <button id="copyBtn">COPY</button>
+  <p id="result"></p>
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const textToCopy = urlParams.get('p');
+    const btn = document.getElementById("copyBtn");
+    const result = document.getElementById("result");
 
-    if (textToCopy) {
-      // テキストをコピー
-      navigator.clipboard.writeText(textToCopy)
-        .then(() => {
-          document.getElementById("copiedText").textContent = `${textToCopy}`;
-        })
-        .catch(err => {
-          document.getElementById("copiedText").textContent = "ERROR " + err;
-        });
-    } else {
-      document.getElementById("copiedText").textContent = "WTF";
-    }
+    btn.addEventListener("click", () => {
+      if (textToCopy) {
+        navigator.clipboard.writeText(textToCopy)
+          .then(() => {
+            result.textContent = "Succseful";
+          })
+          .catch(err => {
+            result.textContent = "ERROR: " + err;
+          });
+      } else {
+        result.textContent = "YOUR IDIOT FUCK";
+      }
+    });
   </script>
 </body>
 </html>
